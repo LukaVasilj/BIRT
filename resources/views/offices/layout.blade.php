@@ -43,6 +43,22 @@
     background-color: #e0e0e0;
 }
 
+/* Dodajte fiksni položaj za zaglavlje */
+.fixed-header {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff; /* Možete prilagoditi boju pozadine po želji */
+    z-index: 100;
+}
+
+.table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            transform: scale(1.05);
+            background-color: #ffe1a6;
+        }
 
 
         </style>

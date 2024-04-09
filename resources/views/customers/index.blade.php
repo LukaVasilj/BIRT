@@ -21,7 +21,7 @@
                         <div class="table-scroll">
                             <table class="table">
                                 <thead>
-                                    <tr>
+                                    <tr class="fixed-header">
                                         <th>#</th>
                                         <th>buttons</th>
                                         <th>customerNumber</th>

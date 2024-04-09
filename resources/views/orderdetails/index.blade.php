@@ -1,11 +1,12 @@
-@extends('employees.layout')
+@extends('products.layout')
 @section('content')
-    <div class="container">
+
+<div class="container">
         <div class="row">
 
             <div class="col-md-12">
                 <div class="card">
-                    <h1>EMPLOYEES</h1>
+                    <h1>Products</h1>
                     <div class="card-body">
                         <a href="{{ url('/employees/create') }}" class="btn btn-success btn-sm" title="Add New Contact">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
@@ -38,7 +39,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  @foreach($employees as $item)
+                                  @foreach($orderdetails as $item)
                                     <tr>
                                         <td class="red-text">{{ $loop->iteration }}</td>
                                         <td>
@@ -52,15 +53,12 @@
                                             </form>
                                         </td>
 
-                                        <td class="red-text">{{ $item->employeeNumber }}</td>
-                                        <td>{{ $item->lastName }}</td>
-                                        <td>{{ $item->firstName }}</td>
-                                        <td>{{ $item->extension }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{{ $item->office->city }} </>
+                                        <td>{{ $item->orderNumber }}</td>
+                                        <td>{{ $item->productCode }}</td>
+                                        <td>{{ $item->quantityOrdered }}</td>
+                                        <td>{{ $item->priceEach }}</td>
+                                        <td>{{ $item->orderLineNumber }}</td>
 
-                                        <td>{{ $item->reportsTo }}</td>
-                                        <td>{{ $item->jobTitle }}</td>
 
 
 
@@ -76,4 +74,5 @@
             </div>
         </div>
     </div>
+
 @endsection

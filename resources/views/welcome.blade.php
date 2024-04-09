@@ -61,6 +61,9 @@
     <a href="{{ url('/offices') }}" class="btn" title="Add New Office">
         <i class="fa fa-plus" aria-hidden="true"></i> Offices
     </a>
+
+
+
 </div>
 
 </body>
