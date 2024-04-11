@@ -3,22 +3,16 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-
-
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::get('/user', function (Request $request) {
     return $request->user();
+})->middleware('auth:sanctum');
+
+Route::get('/hello', function () {
+    return response()->json(['message' => 'Hello, API!']);
 });
+
+Route::get('/games',[App\Http\Controllers\GameController::class, 'index']);
+Route::get('/games/{id}',[App\Http\Controllers\GameController::class, 'show']);
+Route::post('/games',[App\Http\Controllers\GameController::class, 'store']);
+Route::put('/games/{id}',[App\Http\Controllers\GameController::class, 'update']);
+Route::delete('/games/{id}',[App\Http\Controllers\GameController::class, 'destroy']);
