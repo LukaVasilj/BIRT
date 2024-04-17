@@ -11,7 +11,7 @@ class Productlines extends Model
 
     protected $table = 'productlines';
 
-    protected $primaryKey = 'productLine';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'productLine',
@@ -21,6 +21,9 @@ class Productlines extends Model
 
 
     ];
+
+    protected $hidden = ['image']; // Sakrivanje atributa 'image' prilikom serijalizacije u JSON
+
 
     public $timestamps = false;
 
