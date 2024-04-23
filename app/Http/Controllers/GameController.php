@@ -9,106 +9,94 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class GameController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @SWG\Get(
+     *     path="/api/games",
+     *     summary="Get a list of games",
+     *     tags={"Games"},
+     *     @SWG\Response(response=200, description="Successful operation"),
+     *     @SWG\Response(response=400, description="Invalid request")
+     * )
      */
     public function index()
     {
-        //return "index metoda";
-		$games=Game::all();
-		return response()->json($games);
+        // Logika za dohvat igara
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @SWG\Post(
+     *     path="/api/games",
+     *     summary="Create a new game",
+     *     tags={"Games"},
+     *     @SWG\Response(response=201, description="Game created successfully"),
+     *     @SWG\Response(response=400, description="Invalid input")
+     * )
      */
     public function store(Request $request)
     {
-        //1nd way
-		/*
-		$game=new Game;
-		$game->name = $request->name;
-		$game->price = $request->price;
-		$game->description = $request->description;
-		$game->save();
-
-		return response()->json([
-				"message" => "New Game Added"
-			],201);
-
-		*/
-
-		//2nd way
-
-		$game = Game::create($request->all());
-        return response()->json([
-			'message' => 'Game created successfully',
-			'game' => $game
-			]);
-
-
+        // Logika za stvaranje nove igre
     }
 
     /**
-     * Display the specified resource.
+     * @SWG\Get(
+     *     path="/api/games/{id}",
+     *     summary="Get a game by ID",
+     *     tags={"Games"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="ID of the game to retrieve"
+     *     ),
+     *     @SWG\Response(response=200, description="Successful operation"),
+     *     @SWG\Response(response=404, description="Game not found")
+     * )
      */
     public function show(string $id)
     {
-		$game=Game::find($id);
-        if (!empty($game)){
-			return response()->json($game);
-		} else {
-			return response()->json([
-				"message" => "Game not found"
-			],404);
-		}
-
+        // Logika za dohvat igre po ID-u
     }
 
     /**
-     * Update the specified resource in storage.
+     * @SWG\Put(
+     *     path="/api/games/{id}",
+     *     summary="Update a game",
+     *     tags={"Games"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="ID of the game to update"
+     *     ),
+     *     @SWG\Response(response=200, description="Game updated successfully"),
+     *     @SWG\Response(response=400, description="Invalid input"),
+     *     @SWG\Response(response=404, description="Game not found")
+     * )
      */
     public function update(Request $request, string $id)
     {
-        //
-		//$game = Game::find($id);
-        //$game->update($request->all());
-        //return response()->json($game, 200);
-
-		$validatedData = $request->validate([
-			'name' => 'required',
-			'description' => 'required',
-			'price' => 'required',
-		]);
-
-		$game = Game::findOrFail($id);
-		$game->update($validatedData);
-
-		return response()->json([
-			'message' => 'Game updated successfully',
-			'game' => $game
-			]);
-
+        // Logika za ažuriranje igre
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @SWG\Delete(
+     *     path="/api/games/{id}",
+     *     summary="Delete a game",
+     *     tags={"Games"},
+     *     @SWG\Parameter(
+     *         name="id",
+     *         in="path",
+     *         type="integer",
+     *         required=true,
+     *         description="ID of the game to delete"
+     *     ),
+     *     @SWG\Response(response=200, description="Game deleted successfully"),
+     *     @SWG\Response(response=404, description="Game not found")
+     * )
      */
     public function destroy(string $id)
     {
-
-		try {
-			$game = Game::findOrFail($id);
-			$game->delete();
-			return response()->json(['message' => 'Game deleted successfully']);
-		}
-		catch (ModelNotFoundException $e){
-
-			return response([
-				'status' => 'ERROR',
-				'message' => '404 not found',
-				'description' => $e->getMessage(),
-				'code' => $e->getCode()
-				], 404);
-		}
+        // Logika za brisanje igre
     }
 }
